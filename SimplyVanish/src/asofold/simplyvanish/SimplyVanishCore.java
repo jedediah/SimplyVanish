@@ -304,8 +304,6 @@ public class SimplyVanishCore implements Listener{
 	/**
 	 * Attempt some workaround for experience orbs:
 	 * prevent it getting near the player.
-	 * @param target
-	 * @param entity
 	 */
 	void repellExpOrb(Player player, ExperienceOrb orb) {
 		Location pLoc = player.getLocation();
@@ -444,6 +442,10 @@ public class SimplyVanishCore implements Listener{
 				}
 			}
 		}
+
+        player.setEntityCollision(false);
+        player.setAffectsSpawning(false);
+
 		if (message) player.sendMessage(was?SimplyVanish.msgStillInvisible:SimplyVanish.msgNowInvisible);
 		SimplyVanish.stats.addStats(SimplyVanish.statsVanish, System.nanoTime()-ns);
 	}
@@ -481,6 +483,10 @@ public class SimplyVanishCore implements Listener{
 				}
 			}
 		}
+
+        player.setEntityCollision(true);
+        player.setAffectsSpawning(true);
+
 		if (message) player.sendMessage(SimplyVanish.msgLabel+ChatColor.GRAY+"You are "+(was?"now":"still")+" "+ChatColor.RED+"visible"+ChatColor.GRAY+" to everyone!");
 		SimplyVanish.stats.addStats(SimplyVanish.statsReappear, System.nanoTime()-ns);
 	}
